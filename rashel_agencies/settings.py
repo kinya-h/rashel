@@ -171,9 +171,9 @@ STATICFILES_DIRS = [
 
 
 
-# import mimetypes
-# mimetypes.add_type("text/css", ".css", True)
-# mimetypes.add_type("text/html", ".html", True)
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".html", True)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
