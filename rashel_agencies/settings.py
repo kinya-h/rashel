@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gm)fnxvlmlja*+!@6#429)j4k=vgtgn@)!*abx*zy^-m1ry%x)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['.vercel.app']
 ALLOWED_HOSTS = ['*']
@@ -91,7 +91,6 @@ CORS_ALLOW_CREDENTIALS = True
 #     # ...
 # ] 
 
-ALLOWED_HOST = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://rashel-production.up.railway.app'
