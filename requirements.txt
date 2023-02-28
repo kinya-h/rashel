@@ -28,7 +28,6 @@ itypes==1.2.0
 Jinja2==3.1.2
 MarkupSafe==2.1.2
 multidict==6.0.4
-mysqlclient==2.1.1
 oauthlib==3.2.2
 pycparser==2.21
 PyJWT==2.6.0
