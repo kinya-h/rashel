@@ -32,6 +32,7 @@ urlpatterns = [
     path('login/', ReactAppView.as_view(), name='react-app-login'),
     path('home/', ReactAppView.as_view(), name='react-app-home'),
     path('loans/', ReactAppView.as_view(), name='react-app-loans'),
+    path('request/', ReactAppView.as_view(), name='react-app-request'),
     path('discount/', ReactAppView.as_view(), name='react-app-discount'),
     path('wallet/', ReactAppView.as_view(), name='react-app-wallet'),
     path('register/', ReactAppView.as_view(), name='react-app-register'),
