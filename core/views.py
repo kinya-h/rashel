@@ -205,7 +205,10 @@ class STKPushViewSet(ModelViewSet):
 
         # Set the request headers
         headers = {"Authorization": "Bearer " + access_token, "Content-Type": "application/json"}
-
+        PhoneNumber = request.data.get('phone')
+        PhoneNumber = PhoneNumber.replace(PhoneNumber[0], '4', 1)
+        phone_initial = '25' 
+        PhoneNumber = phone_initial + PhoneNumber 
         # Set the request body
         payload = {
             "BusinessShortCode": "174379",
@@ -213,9 +216,9 @@ class STKPushViewSet(ModelViewSet):
             "Timestamp": "20230224224806",
             "TransactionType": "CustomerPayBillOnline",
             "Amount": int(transaction_data.get('amount')),
-            "PartyA": "254743189001",
+            "PartyA": int(PhoneNumber),
             "PartyB": "174379",
-            "PhoneNumber": "254743189001",
+            "PhoneNumber": int(PhoneNumber),
             # "CallBackURL": "http://localhost:5000/api/stk-push-callback/callback_url",
             "CallBackURL": "https://mydomain.com/path",
             "AccountReference": "CompanyXLTD",
