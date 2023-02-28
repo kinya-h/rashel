@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
       'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    ,
+    
     # 'django_nextjs.middleware.Middleware',
         # 'django_nextjs.middleware.NextjsMiddleware',
     
