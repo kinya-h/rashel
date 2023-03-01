@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import mimetypes
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,13 +50,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+"django.middleware.security.SecurityMiddleware",
+"whitenoise.middleware.WhiteNoiseMiddleware",
     'debug_toolbar.middleware.DebugToolbarMiddleware',
       'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    # 'django_nextjs.middleware.Middleware',
-        # 'django_nextjs.middleware.NextjsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+   
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,9 +91,16 @@ INTERNAL_IPS = [
     # ...
 ] 
 
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://rashel-production.up.railway.app'
+]
+
 WSGI_APPLICATION = 'rashel_agencies.wsgi.application'
 
 
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".html", True)
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
