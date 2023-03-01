@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-import mimetypes
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,15 +49,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-'django.middleware.security.SecurityMiddleware',
-"whitenoise.middleware.WhiteNoiseMiddleware",
     'debug_toolbar.middleware.DebugToolbarMiddleware',
       'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     # 'django_nextjs.middleware.Middleware',
         # 'django_nextjs.middleware.NextjsMiddleware',
-    
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,17 +85,11 @@ TEMPLATES = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-# INTERNAL_IPS = [
-#     # ...
-#     '127.0.0.1',
-#     # ...
-# ] 
-
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://rashel-production.up.railway.app'
-]
-
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+] 
 
 WSGI_APPLICATION = 'rashel_agencies.wsgi.application'
 
@@ -174,9 +165,9 @@ STATICFILES_DIRS = [
 
 
 
-
-mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("text/html", ".html", True)
+# import mimetypes
+# mimetypes.add_type("text/css", ".css", True)
+# mimetypes.add_type("text/html", ".html", True)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -200,3 +191,4 @@ SIMPLE_JWT = {
 }
 
 
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc2NDk1Njk3LCJqdGkiOiIyNmFmN2Y2ZGI1Yjc0NGE0YjAzZmU1Y2JhN2YwNGE3OCIsInVzZXJfaWQiOjJ9.oLEz4RmJYjjLjmlT4FwKK-7I7GkG2KGLzuahHCcoAKs

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Category, Loan,Product, Game, Wallet, Transaction
+from .models import Customer, Category, Loan,Product, Game, Wallet, Transaction , Referral
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -14,6 +14,15 @@ class CategoryAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('name',)
     search_fields = ('name',)
+
+@admin.register(Referral)
+class ReferralAdmin(admin.ModelAdmin):
+    list_display = ('user', 'referred_by' , 'created_at')
+    list_per_page = 25
+    ordering = ('user','referred_by' ,'created_at')
+    search_fields = ('referred_by',)
+    autocomplete_fields = ['referred_by']
+    list_select_related = ['user']
 
 @admin.register(Loan)
 class LoanAdmin(admin.ModelAdmin):

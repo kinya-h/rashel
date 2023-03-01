@@ -17,6 +17,13 @@ class Customer(models.Model):
 
     # class Meta:
     #      ordering = ['first_name', 'last_name']        
+class Referral(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='referrals')
+    referred_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='referred_users')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s referral ({self.referred_by})"
 
 class Category(models.Model):
     name = models.CharField(max_length=50)

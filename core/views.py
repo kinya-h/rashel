@@ -11,8 +11,8 @@ from django.db.models import Sum,Avg,Max,Min,Count,F,Q
 from rest_framework.permissions import AllowAny, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser, IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet,GenericViewSet
-from .models import Customer, Category, Product, Game, Wallet, Transaction , Loan
-from .serializers import CustomerSerializer, CategorySerializer, ProductSerializer, GameSerializer, WalletSerializer, TransactionSerializer , LoanSerializer
+from .models import Customer, Category, Product, Game, Wallet, Transaction , Loan,Referral
+from .serializers import CustomerSerializer, CategorySerializer, ProductSerializer, GameSerializer, WalletSerializer, TransactionSerializer , LoanSerializer,ReferralSerializer
 from django.views.generic import TemplateView
 from django.http import HttpResponseBadRequest
 from datetime import datetime
@@ -110,6 +110,14 @@ class ProductViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {'request':self.request} 
+        
+class ReferralViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = Referral.objects.all()
+    serializer_class = ReferralSerializer
+
+    def get_queryset(self):
+        return Referral.objects.filter(user=self.request.user)
 
 class LoanViewSet(ModelViewSet):
     queryset = Loan.objects.all()
