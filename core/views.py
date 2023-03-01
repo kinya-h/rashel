@@ -166,8 +166,10 @@ class WalletViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
-        (wallet, created) = Wallet.objects.get_or_create(
-            customer_id=request.user.id)
+        # (wallet, created) = Wallet.objects.get_or_create(
+        #     customer_id=request.user.id)
+        wallet, created = Wallet.objects.get_or_create(defaults={'customer_id': request.user.id})
+
         if request.method == 'GET':
             serializer = WalletSerializer(wallet)
             return Response(serializer.data)
