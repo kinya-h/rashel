@@ -82,7 +82,7 @@ class WalletAdmin(admin.ModelAdmin):
         return wallet.customer.first_name
 
 
-    def customer_name(self , wallet):
+    def customer_lname(self , wallet):
         return wallet.customer.last_name
 
 @admin.register(Transaction)
