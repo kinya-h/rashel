@@ -113,7 +113,6 @@ class ProductViewSet(ModelViewSet):
         
 class ReferralViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = Referral.objects.all()
     serializer_class = ReferralSerializer
 
     def get_queryset(self):
