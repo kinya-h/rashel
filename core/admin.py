@@ -72,12 +72,18 @@ class GameAdmin(admin.ModelAdmin):
 
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'balance')
+    list_display = ('customer_name', 'balance')
     list_per_page = 25
     ordering = ('-balance',)
-    search_fields = ('customer__first_name', 'customer__last_name')
+    search_fields = ('customer_fname', 'customer_lname')
 
     list_select_related = ['customer']
+    def customer_fname(self , wallet):
+        return wallet.customer.first_name
+
+
+ def customer_name(self , wallet):
+        return wallet.customer.last_name
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
