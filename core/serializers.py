@@ -8,7 +8,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ['id' , 'user_id' , "phone" , 'email']
 
 class ReferralSerializer(serializers.ModelSerializer):
-    referred_by_username = serializers.CharField(source='referred_by.username', read_only=True)
+    # referred_by_username = serializers.CharField(source='referred_by.username', read_only=True)
 
     class Meta:
         model = Referral
