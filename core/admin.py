@@ -17,12 +17,12 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Referral)
 class ReferralAdmin(admin.ModelAdmin):
-    list_display = ('user', 'referred_by' , 'created_at')
+    list_display = ( 'referred_by' , 'created_at')
     list_per_page = 25
-    ordering = ('user','referred_by' ,'created_at')
+    ordering = ('referred_by' ,'created_at')
     search_fields = ('referred_by',)
-    autocomplete_fields = ['referred_by']
-    list_select_related = ['user']
+    # autocomplete_fields = ['referred_by']
+    list_select_related = ['referred_by']
 
 @admin.register(Loan)
 class LoanAdmin(admin.ModelAdmin):
@@ -77,15 +77,15 @@ class WalletAdmin(admin.ModelAdmin):
     ordering = ('-balance',)
     search_fields = ('customer_fname', 'customer_lname')
 
-    
-    
+
+
     list_select_related = ['customer']
     def customer_fname(self , wallet):
         return wallet.customer.first_name
 
 
     def customer_lname(self , wallet):
-        return wallet.customer.last_name
+        return wallet.wallet.last_name
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
