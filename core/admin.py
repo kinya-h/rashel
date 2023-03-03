@@ -3,10 +3,13 @@ from .models import Customer, Category, Loan,Product, Game, Wallet, Transaction 
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
+    inlines = [WalletInline]
     list_display = ('first_name', 'last_name', 'email', 'phone', 'address', 'date_created')
     list_per_page = 25
     ordering = ('-date_created',)
     search_fields = ('first_name', 'last_name', 'email')
+class WalletInline(admin.TabularInline):
+    model = Wallet
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -70,16 +73,15 @@ class GameAdmin(admin.ModelAdmin):
 
     list_select_related = ['product']
 
-class CustomerInline(admin.TabularInline):
-    model = Customer
+
 
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):
-    inlines = [CustomerInline]
+    
     list_display = ('customer_email', 'customer_phone' ,'balance')
     list_per_page = 25
     ordering = ('-balance',)
-    search_fields = ('customer_fname', 'customer_lname')
+    search_fields = ('customer_email', 'customer_phone')
 
     list_select_related = ['customer']
 
