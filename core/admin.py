@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Customer, Category, Loan,Product, Game, Wallet, Transaction , Referral
 
+class WalletInline(admin.TabularInline):
+    model = Wallet
+
+
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
     inlines = [WalletInline]
@@ -8,8 +12,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('-date_created',)
     search_fields = ('first_name', 'last_name', 'email')
-class WalletInline(admin.TabularInline):
-    model = Wallet
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
