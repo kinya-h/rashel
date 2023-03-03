@@ -70,22 +70,25 @@ class GameAdmin(admin.ModelAdmin):
 
     list_select_related = ['product']
 
+class CustomerInline(admin.TabularInline):
+    model = Customer
+
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):
-    list_display = ('customer_fname', 'balance')
+    inlines = [CustomerInline]
+    list_display = ('customer_email', 'customer_phone' ,'balance')
     list_per_page = 25
     ordering = ('-balance',)
     search_fields = ('customer_fname', 'customer_lname')
 
-
-
     list_select_related = ['customer']
-    def customer_fname(self , wallet):
-        return wallet.customer.first_name
+
+    def customer_phone(self , wallet):
+        return wallet.customer.phone
 
 
-    def customer_lname(self , wallet):
-        return wallet.wallet.last_name
+    def customer_email(self , wallet):
+        return wallet.customer.email
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):

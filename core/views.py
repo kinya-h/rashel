@@ -113,6 +113,8 @@ class ProductViewSet(ModelViewSet):
         
 class ReferralViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    queryset = Wallet.objects.all()
     serializer_class = ReferralSerializer
 
 
@@ -124,8 +126,6 @@ class ReferralViewSet(ModelViewSet):
         serializer.save()
         return Response(serializer.data)
 
-    def get_queryset(self):
-        return Referral.objects.filter(user=self.request.user)
 
 class LoanViewSet(ModelViewSet):
     queryset = Loan.objects.all()
