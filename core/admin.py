@@ -1,12 +1,18 @@
 from django.contrib import admin
 from .models import Customer, Category, Loan,Product, Game, Wallet, Transaction , Referral
 
+class WalletInline(admin.TabularInline):
+    model = Wallet
+
+
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
+    inlines = [WalletInline]
     list_display = ('first_name', 'last_name', 'email', 'phone', 'address', 'date_created')
     list_per_page = 25
     ordering = ('-date_created',)
     search_fields = ('first_name', 'last_name', 'email')
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -73,12 +79,20 @@ class GameAdmin(admin.ModelAdmin):
 
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'balance')
+    
+    list_display = ('customer_email', 'customer_phone' ,'balance')
     list_per_page = 25
     ordering = ('-balance',)
-    search_fields = ('customer__first_name', 'customer__last_name')
+    search_fields = ('customer_email', 'customer_phone')
 
     list_select_related = ['customer']
+
+    def customer_phone(self , wallet):
+        return wallet.customer.phone
+
+
+    def customer_email(self , wallet):
+        return wallet.customer.email
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
