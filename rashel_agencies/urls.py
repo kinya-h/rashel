@@ -36,7 +36,6 @@ urlpatterns = [
     path('wallet/', ReactAppView.as_view(), name='react-app-wallet'),
     path('spin/', ReactAppView.as_view(), name='react-app-spin'),
     path('register/', ReactAppView.as_view(), name='react-app-register'),
-    path('request/', ReactAppView.as_view(), name='react-app-request'),
     #  path('login/', TemplateView.as_view(template_name='login.html')),
     path('api/', include('core.urls')),
      path('auth/', include('djoser.urls')),

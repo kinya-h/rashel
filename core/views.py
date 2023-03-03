@@ -108,24 +108,30 @@ class ProductViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category_id']
 
+
+    
     def get_serializer_context(self):
         return {'request':self.request} 
         
 class ReferralViewSet(ModelViewSet):
+
+    queryset = Referral.objects.all()
     permission_classes = [IsAuthenticated]
-    filter_backends = [DjangoFilterBackend]
-    queryset = Wallet.objects.all()
     serializer_class = ReferralSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['referrer']
 
 
     def create(self, request, *args, **kwargs):
-        (wallet, created) = Wallet.objects.get_or_create(
-            referred_by_username=request.data.get('referred_by'))
-        serializer = WalletSerializer(wallet, data={'referred_by':wallet.referred_by})
+        (referral, created) = Referral.objects.get_or_create(
+            user_id=request.user.id)
+        serializer = ReferralSerializer(referral, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-
+    def get_queryset(self):
+        return Referral.objects.filter(referrer=self.request.data.get('username'))
 
 class LoanViewSet(ModelViewSet):
     queryset = Loan.objects.all()
@@ -174,12 +180,8 @@ class WalletViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
-        # (wallet, created) = Wallet.objects.get_or_create(
-        #     customer_id=request.user.id)
-        customer, created = Customer.objects.get_or_create(user_id=request.user.id)
-
-        wallet, created = Wallet.objects.get_or_create(customer_id=customer.id)
-
+        (wallet, created) = Wallet.objects.get_or_create(
+            customer_id=request.user.id)
         if request.method == 'GET':
             serializer = WalletSerializer(wallet)
             return Response(serializer.data)
@@ -239,7 +241,7 @@ class STKPushViewSet(ModelViewSet):
             "PartyA": int(PhoneNumber),
             "PartyB": "174379",
             "PhoneNumber": int(PhoneNumber),
-            # "CallBackURL": "http://localhost:5000/api/stk-push-callback/callback_url",
+            # "CallBackURL": "https://rashel-production.up.railway.app/api/stk-push-callback/callback_url",
             "CallBackURL": "https://mydomain.com/path",
             "AccountReference": "CompanyXLTD",
             "TransactionDesc": "Payment of X"

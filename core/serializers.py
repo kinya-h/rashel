@@ -12,8 +12,8 @@ class ReferralSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Referral
-        fields = ['id',  'referred_by', 'referred_by_username', 'created_at']
-        read_only_fields = ['id',  'referred_by_username', 'created_at']
+        fields = ['id',  'username', 'referrer', 'created_at']
+        read_only_fields = ['id', 'created_at']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
