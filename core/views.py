@@ -115,6 +115,11 @@ class ReferralViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = ReferralSerializer
 
+
+    def create(self, request, *args, **kwargs):
+        (wallet, created) = Wallet.objects.get_or_create(
+            user_username=request.data.get('referred_by'))
+
     def get_queryset(self):
         return Referral.objects.filter(user=self.request.user)
 

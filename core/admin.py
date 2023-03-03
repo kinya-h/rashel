@@ -77,6 +77,8 @@ class WalletAdmin(admin.ModelAdmin):
     ordering = ('-balance',)
     search_fields = ('customer_fname', 'customer_lname')
 
+    
+    
     list_select_related = ['customer']
     def customer_fname(self , wallet):
         return wallet.customer.first_name
