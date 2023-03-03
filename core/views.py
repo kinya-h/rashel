@@ -119,7 +119,7 @@ class ReferralViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         (wallet, created) = Wallet.objects.get_or_create(
             referred_by_username=request.data.get('referred_by'))
-        serializer = WalletSerializer(wallet, data={referred_by:wallet.referred_by)
+        serializer = WalletSerializer(wallet, data={'referred_by':wallet.referred_by})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
