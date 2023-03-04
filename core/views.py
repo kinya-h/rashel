@@ -130,8 +130,7 @@ class ReferralViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    def get_queryset(self):
-        return Referral.objects.filter(referrer=self.request.data.get('username'))
+    
 
 class LoanViewSet(ModelViewSet):
     queryset = Loan.objects.all()
